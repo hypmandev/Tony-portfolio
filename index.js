@@ -36,3 +36,26 @@ const headerLogoConatiner = document.querySelector('.header__logo-container')
 headerLogoConatiner.addEventListener('click', () => {
   location.href = 'index.html'
 })
+
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault(); // Prevent default form submission
+ 
+  const formData = new FormData(e.target);
+ 
+  try {
+    const response = await fetch('https://example.com/submit-form', {
+      method: 'POST',
+      body: formData
+    });
+ 
+    if (response.ok) {
+      document.getElementById('contact-form').reset();
+      document.getElementById('success-message').style.display = 'block';
+    } else {
+      alert('There was an error submitting the form.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('There was a problem with the submission.');
+  }
+});
